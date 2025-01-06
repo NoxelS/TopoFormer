@@ -11,18 +11,15 @@ import numpy as np
 import torch
 import torch.utils.checkpoint
 from torch import nn
-from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss, HuberLoss
-
+from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, HuberLoss, MSELoss
 from transformers.activations import ACT2FN
 from transformers.modeling_outputs import BaseModelOutput
 from transformers.modeling_utils import PreTrainedModel
-from transformers.pytorch_utils import find_pruneable_heads_and_indices, prune_linear_layer
-from transformers.utils import (
-    ModelOutput,
-    logging,
-)
-from .configuration_topt import TopTConfig
+from transformers.pytorch_utils import (find_pruneable_heads_and_indices,
+                                        prune_linear_layer)
+from transformers.utils import ModelOutput, logging
 
+from .configuration_topt import TopTConfig
 
 logger = logging.get_logger(__name__)
 

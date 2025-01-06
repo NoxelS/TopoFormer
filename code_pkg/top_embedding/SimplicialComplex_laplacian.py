@@ -12,13 +12,12 @@
 """
 
 
-import numpy as np
-import itertools
-from functools import wraps
 import copy
-import argparse
-import sys
+import itertools
 import time
+from functools import wraps
+
+import numpy as np
 from scipy.spatial import distance
 
 

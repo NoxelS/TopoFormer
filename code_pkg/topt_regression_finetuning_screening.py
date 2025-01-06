@@ -17,27 +17,22 @@
 """
 
 
-import logging, sys
-from typing import Optional
-from sklearn.preprocessing import StandardScaler, RobustScaler, MinMaxScaler
-from sklearn.pipeline import Pipeline
-from transformers.trainer_utils import get_last_checkpoint
-from transformers import (
-    HfArgumentParser,
-    TrainingArguments,
-    Trainer,
-    BatchFeature,
-)
-from datasets import Dataset
-from datasets import load_metric
+import logging
+import os
+import pickle
 from dataclasses import dataclass, field
-import torch, os, pickle
+from typing import Optional
+
 import numpy as np
 import pandas as pd
-import glob
-
-from top_transformer import TopTConfig
-from top_transformer import TopTForImageClassification
+import torch
+from datasets import Dataset, load_metric
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from top_transformer import TopTConfig, TopTForImageClassification
+from transformers import (BatchFeature, HfArgumentParser, Trainer,
+                          TrainingArguments)
+from transformers.trainer_utils import get_last_checkpoint
 
 
 @dataclass

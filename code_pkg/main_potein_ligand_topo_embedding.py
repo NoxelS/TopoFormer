@@ -1,11 +1,9 @@
-import numpy as np
+import argparse
 import linecache
 import os
 import sys
-import argparse
-import shutil
-import glob
 
+import numpy as np
 from top_embedding import SimplicialComplex_laplacian
 
 

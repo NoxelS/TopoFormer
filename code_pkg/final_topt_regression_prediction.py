@@ -1,18 +1,15 @@
-from sklearn.preprocessing import StandardScaler, RobustScaler, MinMaxScaler
-from sklearn.pipeline import Pipeline
-from sklearn import metrics
-from scipy.stats import pearsonr
-from transformers import BatchFeature
-import torch
-from datasets import Dataset
+
+import glob
+import os
+import pickle
+
 import numpy as np
 import pandas as pd
-import os, pickle, glob
-import argparse
-import sys
-
+import torch
+from scipy.stats import pearsonr
+from sklearn import metrics
 from top_transformer import TopTForImageClassification
-from top_transformer import TopTForPreTraining
+from transformers import BatchFeature
 
 
 def metrics_func(true_value, predict_value):

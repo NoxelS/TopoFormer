@@ -17,20 +17,15 @@
 """
 
 
-from sklearn.preprocessing import StandardScaler, RobustScaler, MinMaxScaler
-from sklearn.pipeline import Pipeline
-from transformers import BatchFeature
-import torch
-from datasets import Dataset
-import numpy as np
-import pandas as pd
-import os, pickle
 import argparse
+import pickle
 import sys
 
-from top_transformer import TopTModel
-from top_transformer import TopTForPreTraining
-from top_transformer import TopTForImageClassification
+import numpy as np
+import torch
+from top_transformer import (TopTForImageClassification, TopTForPreTraining,
+                             TopTModel)
+from transformers import BatchFeature
 
 
 def pooler_func(pooler_type):
