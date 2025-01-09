@@ -55,8 +55,19 @@ def main_latent_from_pretrained_model(args):
         device = torch.device('cpu')
     print(f'Extract feature on {device} device.')
     
-    # scale
-    num_sample, num_channel, height, width = np.shape(top_feature_array)
+    # fixed missing sample dimension
+    if len(np.shape(top_feature_array)) == 3:
+        # scale
+        num_sample = 1
+        num_channel, height, width = np.shape(top_feature_array)
+
+    elif len(np.shape(top_feature_array)) == 4:
+        # scale
+        num_sample, num_channel, height, width = np.shape(top_feature_array)
+    else:
+        raise TypeError(f"Feature shape is invalid, shape gotten: {np.shape(top_feature_array)}, shape needed: (<num_sample>, num_channel, height, width)")
+
+
     print(f'Input shape: ({num_sample}, {num_channel}, {height}, {width})')
     data_0 = np.reshape(top_feature_array, [num_sample, num_channel*height*width])
     scaled_data = scaler.transform(data_0).reshape([num_sample, num_channel, height, width])
@@ -97,9 +108,21 @@ def main_latent_from_finetuned_model(args):
     else:
         device = torch.device('cpu')
     print(f'Extract feature on {device} device.')
-    
-    # scale
-    num_sample, num_channel, height, width = np.shape(top_feature_array)
+
+
+    # fixed missing sample dimension
+    if len(np.shape(top_feature_array)) == 3:
+        # scale
+        num_sample = 1
+        num_channel, height, width = np.shape(top_feature_array)
+
+    elif len(np.shape(top_feature_array)) == 4:
+        # scale
+        num_sample, num_channel, height, width = np.shape(top_feature_array)
+    else:
+        raise TypeError(f"Feature shape is invalid, shape gotten: {np.shape(top_feature_array)}, shape needed: (<num_sample>, num_channel, height, width)")
+
+
     print(f'Input shape: ({num_sample}, {num_channel}, {height}, {width})')
     data_0 = np.reshape(top_feature_array, [num_sample, num_channel*height*width])
     scaled_data = scaler.transform(data_0).reshape([num_sample, num_channel, height, width])
@@ -139,14 +162,26 @@ def main_latent_from_pretrained_decoder(args):
     else:
         device = torch.device('cpu')
     print(f'Extract feature on {device} device.')
-    
-    # scale
-    num_sample, num_channel, height, width = np.shape(top_feature_array)
+
+
+    # fixed missing sample dimension
+    if len(np.shape(top_feature_array)) == 3:
+        # scale
+        num_sample = 1
+        num_channel, height, width = np.shape(top_feature_array)
+
+    elif len(np.shape(top_feature_array)) == 4:
+        # scale
+        num_sample, num_channel, height, width = np.shape(top_feature_array)
+    else:
+        raise TypeError(f"Feature shape is invalid, shape gotten: {np.shape(top_feature_array)}, shape needed: (<num_sample>, num_channel, height, width)")
+
+
     print(f'Input shape: ({num_sample}, {num_channel}, {height}, {width})')
     data_0 = np.reshape(top_feature_array, [num_sample, num_channel*height*width])
     scaled_data = scaler.transform(data_0).reshape([num_sample, num_channel, height, width])
     model_inputs = BatchFeature({"topological_features": scaled_data}, tensor_type='pt').to(device)
-    
+
     # model
     model.to(device)
     model.config.update(dict(mask_ratio=0))
